@@ -55,7 +55,7 @@ def XLSTODB(XLSNAME):
 	return rows
 	
 def updateDatabase(rows):
-
+	print rows 
 	for i in rows:
 		id = str(i[0])
 		owner = str(i[1])
@@ -66,11 +66,15 @@ def updateDatabase(rows):
 		saledate = str(i[6])
 		lat = str(i[7])
 		lng = str(i[8])
+		print i 
+		print i[0]
+		print i[1]
+		
 	
 		new_property = Property.objects.create(prop_id = id, owner=owner, address=address, state=state, city=city, bid=bid, date=saledate, lat=lat, lng=lng)
 		print new_property.prop_id
 		print "running"
-		new_property.save()
+	new_property.save()
 		
 		
 
