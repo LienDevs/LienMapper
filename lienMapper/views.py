@@ -25,7 +25,6 @@ def viewMap(request):
 	#return HttpResponse("Success")
 
 def XLSTODB(XLSNAME):
-    
 
 	wb = xl.load_workbook(filename = XLSNAME)
 
@@ -61,7 +60,7 @@ def XLSTODB(XLSNAME):
 
 	
 def updateDatabase(rows):
-
+	
 	for i in rows:
 		id = str(i[0])
 		owner = str(i[1])
