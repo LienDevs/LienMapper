@@ -14,6 +14,10 @@ import openpyxl as xl
 from AddressToLatLon import findLatLng
 XLSNAME = 'liens.xlsx'
 
+def index(request):
+	updateDatabase(XLSTODB('C:\\Users\\jraed\\lienin\\lienMapper\\liens.xlsx'))
+	return HttpResponse("Success")
+
 def XLSTODB(XLSNAME):
     
 
@@ -64,10 +68,12 @@ def updateDatabase(rows):
 		lng = str(i[8])
 	
 		new_property = Property.objects.create(prop_id = id, owner=owner, address=address, state=state, city=city, bid=bid, date=saledate, lat=lat, lng=lng)
-		
+		print new_property.prop_id
+		print "running"
 		new_property.save()
 		
 		
+
 
 	
 	

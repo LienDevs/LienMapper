@@ -3,10 +3,12 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+import openpyxl
+
 # Create your models here.
 
 class Property(models.Model):
-	code = models.CharField(max_length=200)
+	prop_id = models.CharField(max_length=200)
 	owner = models.CharField(max_length=200)
 	address = models.CharField(max_length=200)
 	state = models.CharField(max_length=200)
