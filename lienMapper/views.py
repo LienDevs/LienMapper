@@ -5,11 +5,8 @@ from django.shortcuts import render
 
 # Create your views here.
 
-
 from django.http import HttpResponse
-
 from .models import Property
-
 import openpyxl as xl
 from AddressToLatLon import findLatLng
 XLSNAME = 'liens.xlsx'
@@ -17,6 +14,15 @@ XLSNAME = 'liens.xlsx'
 def index(request):
 	updateDatabase(XLSTODB('C:\\Users\\jraed\\lienin\\lienMapper\\liens.xlsx'))
 	return HttpResponse("Success")
+	
+def viewMap(request): 	
+	d={}
+	props = Property.objects.all()
+	for i in props:
+		d[i.prop_id]=[i.lat,i.lng]
+	#print d
+	return render(request, "mapper.html", {"d":d})
+	#return HttpResponse("Success")
 
 def XLSTODB(XLSNAME):
     
@@ -66,8 +72,6 @@ def updateDatabase(rows):
 		saledate = str(i[6])
 		lat = str(i[7])
 		lng = str(i[8])
-	
-
 		new_property = Property.objects.create(prop_id = id, owner=owner, address=address, state=state, city=city, bid=bid, date=saledate, lat=lat, lng=lng)
 
 	new_property.save()
