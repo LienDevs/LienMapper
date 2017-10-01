@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+{%load staticfiles%}
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Lien Finder</title>
+    <style>
+            html, body {
+              height: 100%;
+              margin: 0;
+              padding: 0;
+            }
+            #map {
+              height: 100%;
+            }
+    </style>
+  </head>
+  <body>
+<div>
+</div>
+
+<div id="map"></div>
+<script>
+
+  function initMap() {
+
+          var coordinate = '{{ test_list | escapejs}}';
+          var jsonDict = JSON.parse(coordinate);
+
+          var starting_coord = Object.keys(jsonDict)[0];
+          var start_lat = jsonDict[starting_coord][0]
+          var start_lng = jsonDict[starting_coord][1]
+
+          var map = new google.maps.Map(document.getElementById('map'),{
+            zoom: 10,
+            center: {lat: start_lat, lng: start_lng}
+          }); 
+
+      for (var propertyID in jsonDict){
+        var marker = new google.maps.Marker({
+          position: {lat: jsonDict[propertyID][0], lng: jsonDict[propertyID][1]},
+          map: map
+        });
+      }
+    }
+  
+  </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABAGhtae7h91pf24nfyZ6eFiPThWW3W4M&callback=initMap">
+    </script>
+
+ </body>
+</html>
